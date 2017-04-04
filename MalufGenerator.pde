@@ -1,7 +1,7 @@
 final int ARC_COUNT = 9;
 
-int[] spacement  = new int[ARC_COUNT*2];
-int[] lineWeight = new int[ARC_COUNT*2];
+int[] spacement  = new int[ARC_COUNT];
+int[] lineWeight = new int[ARC_COUNT];
 
 public void settings(){
   size(500, 500);

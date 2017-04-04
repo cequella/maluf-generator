@@ -3,13 +3,15 @@ public void settings(){
 }
 
 public void drawArcs(int size, color background, color primary){
+  int[] arcPreset = new int[4];
+  
   // Paint Background
   fill(background);
   rect(0,0, size,size);
   
   // Paint Arcs
   smooth();
-  fill(background);
+  noFill();
   
   // NW Arc
   strokeWeight(2);

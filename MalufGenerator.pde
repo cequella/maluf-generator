@@ -11,7 +11,7 @@ public void setup() {
  final float temp = 2*width/ARC_COUNT;
  for(int it=0; it<ARC_COUNT; it++) {
     spacement[it] = int( it*temp );
-    lineWeight[it] = int (temp*0.05*(it+1));
+    lineWeight[it] = int( temp*0.05*(it+1) );
   } 
 }
 

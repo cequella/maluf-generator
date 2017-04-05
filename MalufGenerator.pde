@@ -1,17 +1,18 @@
 final int COUNT = 9;
-int spacement;
 
 public void settings(){
   size(500, 500);
 }
 
 public void setup() {
-  spacement = width/COUNT;
+  
 }
 
 public void drawLine(int startX, int startY,
                      int size, float prop,
                      color color1, color color2) {
+  float spacement = size/COUNT;
+                       
   noStroke();
   for(int it=0; it<COUNT; it++){
     float aux = spacement*0.9;
@@ -25,7 +26,7 @@ public void drawLine(int startX, int startY,
       float temp = (it*spacement+aux)+(spacement-aux);
       
       fill(color1);
-      rect(temp, 0, width-temp, aux);
+      rect(temp, 0, size-temp, aux);
     }
   }
 }

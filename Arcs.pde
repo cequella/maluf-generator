@@ -17,7 +17,7 @@ public class Arcs extends Tile {
     this.primary    = primary;
     this.startX     = startX;
     this.startY     = startY;
-    this.spacement  = 2*getSize()/ARC_COUNT;
+    this.spacement  = 2*getSize()/(ARC_COUNT+1);
     
     // Calc dimensions: line weight and spacement
     for(int it=0; it<ARC_COUNT; it++) {
@@ -53,50 +53,35 @@ public class Arcs extends Tile {
     // Paint Background
     fill(background);
     rect(0,0, getSize(),getSize());
-  
-    // Paint Arcs
-    stroke(primary);
-    for(int it=0; it<=ARC_COUNT; it++){
-      if(it!=ARC_COUNT) {
-        strokeWeight(lineWeight[it]);
+    noStroke();
+    
+    for(int it=0; it<=ARC_COUNT+1; it++){
+      if(it <= ARC_COUNT){
+        fill(primary);
         arc(startX+arcPreset[0],
             startY+arcPreset[1], 
-            getSize()*2-spacement*it,
-            getSize()*2-spacement*it, 
+            getSize()*2 - it*spacement,
+            getSize()*2 - it*spacement,
+            arcPreset[2],
+            arcPreset[3]);
+            
+        float aux = it+((it+1)*0.1);
+        fill(background);
+        arc(startX+arcPreset[0],
+            startY+arcPreset[1], 
+            getSize()*2 - aux*spacement,
+            getSize()*2 - aux*spacement, 
             arcPreset[2],
             arcPreset[3]);
       } else {
-        //float aux = 2*getSize()/ARC_COUNT;
-      
-        noStroke();
         fill(#F4F4F4);
-        //arc(0,0, aux,aux, 0,HALF_PI);
+        arc(startX+arcPreset[0],
+            startY+arcPreset[1], 
+            1.1*spacement,
+            1.1*spacement,
+            arcPreset[2],
+            arcPreset[3]);
       }
-    }
-  }
-  public void show2() {
-    // Paint Background
-    fill(background);
-    rect(0,0, getSize(),getSize());
-    noStroke();
-    
-    for(int it=0; it<=ARC_COUNT; it++){
-      fill(primary);
-      arc(startX+arcPreset[0],
-          startY+arcPreset[1], 
-          getSize()*2 - it*spacement,
-          getSize()*2 - it*spacement,
-          arcPreset[2],
-          arcPreset[3]);
-          
-      float aux = it+((it+1)*0.1);
-      fill(background);
-      arc(startX+arcPreset[0],
-          startY+arcPreset[1], 
-          getSize()*2 - aux*spacement,
-          getSize()*2 - aux*spacement, 
-          arcPreset[2],
-          arcPreset[3]);
     }
   }
 }

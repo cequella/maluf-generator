@@ -1,3 +1,30 @@
+/* Olhar isso!!!
+  class Arc {
+  private int count = 9;
+  private int dCount = 2*count;
+  private int dSize;
+
+  public Arc(int count, int size) {
+    this.count = count;
+    this.dCount = 2*count;
+    this.dSize = (size*2)/count;
+  }
+
+  public void draw() {
+    strokeCap(SQUARE);
+    for (int i=1; i<=count; i++) {
+      strokeWeight(dSize/dCount*i);
+      if (i!=1) {
+        noFill();
+      } else {
+        fill(255);
+      }
+      arc(0, 0, dSize*i, dSize*i, 0, HALF_PI);
+    }
+  }
+};
+  */
+
 public class Arcs extends Tile {
   final int ARC_COUNT = 9;
   

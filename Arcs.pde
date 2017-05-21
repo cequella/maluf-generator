@@ -67,7 +67,7 @@ public class Arcs extends Tile {
   public void show() {
     // Paint Background
     fill(background);
-    rect(0,0, getSize(),getSize());
+    rect(startX, startY, getSize(), getSize());
     noStroke();
     
     for(int it=0; it<=ARC_COUNT+1; it++){
@@ -100,5 +100,3 @@ public class Arcs extends Tile {
     }
   }
 }
-
-//Adicionando comentário inútil

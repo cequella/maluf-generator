@@ -26,28 +26,22 @@
   */
 
 public class Arcs extends Tile {
-  final int ARC_COUNT = 9;
-  
-  private int     spacement;
-  private int[]   lineWeight = new int[ARC_COUNT];
+  private float   spacement;
+  private int[]   lineWeight = new int[COUNT];
   private color   background;
   private color   primary;
-  private int     startX;
-  private int     startY;
   private float[] arcPreset = new float[4];
   
   public Arcs(color background, color primary, 
-              int startX, int startY, 
-              int size, String position){
+              float startX, float startY, 
+              float size, String position){
     super(startX, startY, size);
     this.background = background;
     this.primary    = primary;
-    this.startX     = startX;
-    this.startY     = startY;
-    this.spacement  = 2*getSize()/(ARC_COUNT+1);
+    this.spacement  = 2*getSize()/(COUNT+1);
     
     // Calc dimensions: line weight and spacement
-    for(int it=0; it<ARC_COUNT; it++) {
+    for(int it=0; it<COUNT; it++) {
       lineWeight[it] = int( spacement*0.05*(it+1) );
     }
     
@@ -67,14 +61,15 @@ public class Arcs extends Tile {
   public void show() {
     // Paint Background
     fill(background);
-    rect(startX, startY, getSize(), getSize());
     noStroke();
+    rect(getX(), getY(), getSize(), getSize());
     
-    for(int it=0; it<=ARC_COUNT+1; it++){
-      if(it <= ARC_COUNT){
+    // Draw Arcs
+    for(int it=0; it<=COUNT+1; it++){
+      if(it <= COUNT){
         fill(primary);
-        arc(startX+arcPreset[0],
-            startY+arcPreset[1], 
+        arc(getX()+arcPreset[0],
+            getY()+arcPreset[1], 
             getSize()*2 - it*spacement,
             getSize()*2 - it*spacement,
             arcPreset[2],
@@ -82,21 +77,23 @@ public class Arcs extends Tile {
             
         float aux = it+((it+1)*0.1);
         fill(background);
-        arc(startX+arcPreset[0],
-            startY+arcPreset[1], 
+        arc(getX()+arcPreset[0],
+            getY()+arcPreset[1], 
             getSize()*2 - aux*spacement,
             getSize()*2 - aux*spacement, 
             arcPreset[2],
             arcPreset[3]);
       } else {
-        fill(#F4F4F4);
-        arc(startX+arcPreset[0],
-            startY+arcPreset[1], 
-            1.1*spacement,
-            1.1*spacement,
+        final float size = 2*getSize()/COUNT;
+        fill(Palette.WHITE);
+        arc(getX()+arcPreset[0],
+            getY()+arcPreset[1], 
+            size,
+            size,
             arcPreset[2],
             arcPreset[3]);
       }
     }
+    
   }
 }

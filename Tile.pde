@@ -1,34 +1,23 @@
 public class Tile {
-  private int startX;
-  private int startY;
-  private int size;
-  
-  public Tile(int startX, int startY,
-  int size){
+  private float startX;
+  private float startY;
+  private float size;
+
+  public Tile(float startX, float startY, 
+    float size) {
     this.startX=startX;
     this.startY=startY;
     this.size=size;
   }
-  
+
   // getters
-  public int getX(){
+  public float getX() {
     return this.startX;
   }
-  public int getY(){
+  public float getY() {
     return this.startY;
   }
-  public int getSize(){
+  public float getSize() {
     return this.size;
   }
-  
-  // overridable
-  void generate() {
-    
-  }
-  
-  // others
-  void draw(Palette pallette){
-    
-  }
-  
 }

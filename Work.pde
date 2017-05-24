@@ -46,11 +46,12 @@ class Work {
   }
 
   public void draw() {
-    for (Arcs temp : arc) {
+    /*for (Arcs temp : arc) {
       temp.show();
     }
     for (Grid temp : grid) {
       temp.show();
-    }
+    }*/
+    grid[0].show();
   }
 }

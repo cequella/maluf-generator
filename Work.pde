@@ -11,14 +11,16 @@ class Work {
     genArcs(size);
   }
   private void genGrids(float size){
-    grid[0] = new Grid(0, 0, size, true);
-    grid[1] = new Grid(3*size, 0, size, false);
-    grid[2] = new Grid(size, size, size, true);
-    grid[3] = new Grid(2*size, size, size, false);
-    grid[4] = new Grid(size, 2*size, size, false);
-    grid[5] = new Grid(2*size, 2*size, size, true);
-    grid[6] = new Grid(0, 3*size, size, false);
-    grid[7] = new Grid(3*size, 3*size, size, true);
+    color[] palette = {Palette.WHITE, Palette.BLUE, Palette.YELLOW, Palette.RED};
+    
+    grid[0] = new Grid(0, 0, size, true, palette);
+    grid[1] = new Grid(3*size, 0, size, false, palette);
+    grid[2] = new Grid(size, size, size, true, palette);
+    grid[3] = new Grid(2*size, size, size, false, palette);
+    grid[4] = new Grid(size, 2*size, size, false, palette);
+    grid[5] = new Grid(2*size, 2*size, size, true, palette);
+    grid[6] = new Grid(0, 3*size, size, false, palette);
+    grid[7] = new Grid(3*size, 3*size, size, true, palette);
   }
   private void genArcs(float size){
     arc[0] = new Arcs(Palette.BLACK, Palette.RED, size, 0, size, "SW");
@@ -46,12 +48,11 @@ class Work {
   }
 
   public void draw() {
-    /*for (Arcs temp : arc) {
+    for (Arcs temp : arc) {
       temp.show();
     }
     for (Grid temp : grid) {
       temp.show();
-    }*/
-    grid[0].show();
+    }
   }
 }

@@ -12,20 +12,19 @@ public class Grid extends Tile {
     this.pPiece = piece/COUNT;
   }
 
+  private void drawCollumn(float x, float y, int count, color primary, color secundary){
+    for (int k=0; k<count; k++) {
+        // Draw First-Line
+        fill(primary);
+        rect(x, y+k*this.piece, this.pPiece, this.piece);
+      }
+  }
   private void verticalLines(color primary, color secundary) {
     for (int i=0, j=1; i<COUNT-1; i++, j++) {
       final float cLEFT = getX()+i*this.piece;
       final float cTOP  = getY()+j*this.piece;
 
-      for (int k=j; k<COUNT; k++) {
-        // Draw Firt-Line
-        fill(primary);
-        rect(cLEFT, cTOP+k*this.piece, j*this.pPiece, k*this.pPiece);
-
-        // Draw Second-Line
-        fill(secundary);
-        rect(cLEFT+j*this.pPiece, cTOP+k*this.piece, this.piece-j*this.pPiece, k*this.pPiece );
-      }
+      drawCollumn(cLEFT, cTOP, COUNT-j, primary, secundary);
     }
   }
   private void drawSquares() {
@@ -43,7 +42,9 @@ public class Grid extends Tile {
     }
   }
   public void show() {
-    //noStroke();
+    /*noStroke();
+    fill(Palette.WHITE);
+    rect(getX(), getY(), getSize(), getSize());*/
     verticalLines(Palette.YELLOW, Palette.RED);
     drawSquares();
   }

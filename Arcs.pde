@@ -28,16 +28,14 @@
 public class Arcs extends Tile {
   private float   spacement;
   private int[]   lineWeight = new int[COUNT];
-  private color   background;
-  private color   primary;
+  private color[] palette;
   private float[] arcPreset = new float[4];
   
-  public Arcs(color background, color primary, 
+  public Arcs(color[] palette, 
               float startX, float startY, 
               float size, String position){
     super(startX, startY, size);
-    this.background = background;
-    this.primary    = primary;
+    this.palette    = palette;
     this.spacement  = 2*getSize()/(COUNT+1);
     
     // Calc dimensions: line weight and spacement
@@ -60,14 +58,14 @@ public class Arcs extends Tile {
   
   public void show() {
     // Paint Background
-    fill(background);
+    fill(palette[0]);
     noStroke();
     rect(getX(), getY(), getSize(), getSize());
     
     // Draw Arcs
     for(int it=0; it<=COUNT+1; it++){
       if(it <= COUNT){
-        fill(primary);
+        fill(palette[1]);
         arc(getX()+arcPreset[0],
             getY()+arcPreset[1], 
             getSize()*2 - it*spacement,
@@ -76,7 +74,7 @@ public class Arcs extends Tile {
             arcPreset[3]);
             
         float aux = it+((it+1)*0.1);
-        fill(background);
+        fill(palette[0]);
         arc(getX()+arcPreset[0],
             getY()+arcPreset[1], 
             getSize()*2 - aux*spacement,

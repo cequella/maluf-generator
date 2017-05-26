@@ -61,7 +61,7 @@ public class Grid extends Tile {
   private void drawSquare(float x, float y, float dX, float dY, color[] c) {
     float w1 = 1.0-dX;
     float w2 = dX;
-    float h1 = (direction.equals("NE"))? dY : 1.0-dY;
+    float h1 = (direction.equals("NE") || direction.equals("SW"))? dY : 1.0-dY;
     float h2 = 1.0-h1;
 
     fill(c[0]);

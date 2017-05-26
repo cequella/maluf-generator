@@ -4,24 +4,10 @@ class Work {
   private Arcs arc[] = new Arcs[8];
   private Grid grid[] = new Grid[8];
   private color[] palette;
-  
-  private color[] bla;
 
-  public Work(PApplet context) {
+  public Work(PApplet context, color[] palette) {
     final float size = min(context.width, context.height)/4;
-
-    this.palette = new color[]{Palette.WHITE, Palette.BLACK, 
-     Palette.BLUE, Palette.RED, Palette.YELLOW, 
-     Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
-     Palette.WHITE, Palette.YELLOW, Palette.RED, 
-     Palette.RED, Palette.WHITE, Palette.BLUE};
-    
-    this.bla = new color[]{Palette.WHITE, Palette.BLACK, 
-      Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
-      Palette.BLUE, Palette.RED, Palette.YELLOW, 
-      Palette.RED, Palette.WHITE, Palette.BLUE, 
-      Palette.WHITE, Palette.YELLOW, Palette.RED
-    };
+    this.palette = palette;
 
     genGrids(size);
     genArcs(size);

@@ -4,15 +4,24 @@ class Work {
   private Arcs arc[] = new Arcs[8];
   private Grid grid[] = new Grid[8];
   private color[] palette;
+  
+  private color[] bla;
 
   public Work(PApplet context) {
     final float size = min(context.width, context.height)/4;
 
     this.palette = new color[]{Palette.WHITE, Palette.BLACK, 
-      Palette.BLUE, Palette.RED, Palette.YELLOW, 
+     Palette.BLUE, Palette.RED, Palette.YELLOW, 
+     Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
+     Palette.WHITE, Palette.YELLOW, Palette.RED, 
+     Palette.RED, Palette.WHITE, Palette.BLUE};
+    
+    this.bla = new color[]{Palette.WHITE, Palette.BLACK, 
       Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
-      Palette.WHITE, Palette.YELLOW, Palette.RED, 
-      Palette.RED, Palette.WHITE, Palette.BLUE};
+      Palette.BLUE, Palette.RED, Palette.YELLOW, 
+      Palette.RED, Palette.WHITE, Palette.BLUE, 
+      Palette.WHITE, Palette.YELLOW, Palette.RED
+    };
 
     genGrids(size);
     genArcs(size);
@@ -34,19 +43,19 @@ class Work {
       out = new color[]{palette[0], palette[6], palette[1], palette[5], palette[2], palette[4], palette[1], palette[0]};
       break;
     case 4:
-      out = new color[]{palette[12], palette[1], palette[9], palette[8], palette[11], palette[1], palette[13], palette[0]};
+      out = new color[]{palette[0], palette[1], palette[9], palette[8], palette[11], palette[1], palette[13], palette[0]};
       break;
     case 5:
-      out = new color[]{palette[1], palette[5], palette[7], palette[0], palette[1], palette[0], palette[8], palette[10]};
+      out = new color[]{palette[1], palette[5], palette[0], palette[7], palette[1], palette[0], palette[8], palette[10]};
       break;
     case 6:
       out = new color[]{palette[0], palette[9], palette[0], palette[8], palette[11], palette[13], palette[0], palette[0]};
       break;
     case 7:
-      out = new color[]{palette[7], palette[5], palette[0], palette[0], palette[10], palette[0], palette[0], palette[8]};
+      out = new color[]{palette[7], palette[5], palette[0], palette[0], palette[10], palette[0], palette[8], palette[0]};
       break;
     default:
-      out = new color[]{palette[4], palette[1], palette[2], palette[3], palette[4], palette[1], palette[2], palette[3]};
+      out = new color[]{#FF00FF, #FF00FF, #FF00FF, #FF00FF, #FF00FF, #FF00FF}; //ERROR
     }
 
     return out;
@@ -80,7 +89,7 @@ class Work {
       out = new color[]{palette[8], palette[10]};
       break;
     default:
-      out = new color[]{palette[0], palette[0]};
+      out = new color[]{#FF00FF, #FF00FF}; //ERROR
     }
 
     return out;
@@ -108,8 +117,8 @@ class Work {
 
   public void draw() {
     for (Arcs temp : arc) {
-     temp.show();
-     }
+      temp.show();
+    }
     for (int i=0; i<grid.length; i++) {
       grid[i].show();
     }

@@ -1,66 +1,65 @@
 public class Grid extends Tile {
-  private final boolean direction;
+  private final String direction;
 
   private final float piece;
   private final float pPiece;
   private final color palette[];
   private final color background;
 
-  public Grid(float startX, float startY, float size, boolean leftRight, color background, color[] palette) {
+  public Grid(float startX, float startY, float size, String direction, color background, color[] palette) {
     super(startX, startY, size);
 
-    this.direction = leftRight;
+    this.direction = direction;
     this.piece = getSize()/COUNT;
     this.pPiece = piece/COUNT;
     this.palette = palette;
     this.background = background;
   }
 
-  private void drawCollumn(float x, float y, int count, color[] palette) {
-    final float factor = count*this.pPiece;
-
-    for (int k=0, j=count; k<COUNT-count; k++, j++) {
-      final float top    = y+(k+1)*this.piece;
-      final float bottom = top - j*this.pPiece;
-
-      fill(palette[7]);
-      rect(x, top-this.piece, this.piece-factor, this.piece-j*this.pPiece);
-      fill(palette[6]);
-      rect(x+this.piece-factor, top-this.piece, factor, this.piece-j*this.pPiece);
-      fill(palette[4]);
-      rect(x, bottom, this.piece-factor, j*this.pPiece);
-      fill(palette[5]);
-      rect(x+this.piece-factor, bottom, factor, j*this.pPiece);
+  private void drawCollumns() {
+    color[] aux = {palette[4], palette[5], palette[6], palette[7]};
+    
+    for(int i=0; i<COUNT; i++){
+      final float dy = (i+1)*1.0/(COUNT+1);
+      
+      for(int j=i+1; j<COUNT; j++){
+        final float dx = (j+1)*1.0/(COUNT+1);
+        final float y = (direction.equals("NW")||direction.equals("SE"))? getY()+j*this.piece : getY()+getSize()-j*this.piece-this.piece;
+        
+        drawSquare(getX()+i*this.piece, y, dy, dx, aux);
+      }
     }
   }
-  private void drawLine(float x, float y, int count, color[] palette) {
-    final float factor = count*this.pPiece;
-
-    for (int k=0, j=count; k<COUNT-count; k++, j++) {
-      final float left  = x+(k+1)*this.piece;
-      final float right = left+this.piece-j*this.pPiece;
-
-      fill(palette[0]);
-      rect(left, y-this.piece, this.piece-j*this.pPiece, this.piece-factor);
-      fill(palette[2]);
-      rect(left, y-factor, this.piece-j*this.pPiece, factor);
-      fill(palette[1]);
-      rect(right, y-this.piece, j*this.pPiece, this.piece-factor);
-      fill(palette[3]);
-      rect(right, y-factor, j*this.pPiece, factor);
+  private void drawLines() {
+    color[] aux = {palette[0], palette[1], palette[2], palette[3]};
+    
+    for(int i=0; i<COUNT; i++){
+      final float dy = (i+1)*1.0/(COUNT+1);
+      
+      for(int j=i+1; j<COUNT; j++){
+        final float dx = (j+1)*1.0/(COUNT+1);
+        final float y = (direction.equals("NW")||direction.equals("SE"))? getY()+i*this.piece : getY()+getSize()-(i+1)*this.piece;
+        
+        drawSquare(getX()+j*this.piece, y, dx, dy, aux);
+      }
     }
+  }
+  private void drawSquare(float x, float y, float dX, float dY, color[] c) {
+    fill(c[0]);
+    rect(x, y, dX*this.piece, dY*this.piece);
+    fill(c[1]);
+    rect(x+dX*this.piece, y, (1.0-dX)*this.piece, dY*this.piece);
+    fill(c[2]);
+    rect(x, y+dY*this.piece, dX*this.piece, (1.0-dY)*this.piece);
+    fill(c[3]);
+    rect(x+dX*this.piece, y+dY*this.piece, (1.0-dX)*this.piece, (1.0-dY)*this.piece);
   }
   public void show() {
     noStroke();
     fill(this.background);
     rect(getX(), getY(), getSize(), getSize());
 
-    for (int i=0; i<COUNT-1; i++) {
-      final float cLEFT = getX()+i*this.piece;
-      final float cTOP  = getY()+i*this.piece+this.piece;
-
-      drawLine(cLEFT, cTOP, i+1, palette);
-      //drawCollumn(cLEFT, cTOP, i+1, palette);
-    }
+    drawLines();
+    drawCollumns();
   }
 }

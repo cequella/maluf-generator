@@ -6,7 +6,6 @@ public class Arcs extends Tile {
   public Arcs(float startX, float startY, 
               float size, int orientation, color[] palette){
     super(startX, startY, size, orientation, palette);
-    //this.palette    = palette;
     this.spacement  = 2*getSize()/(COUNT+1);
     
     // Arc Preset

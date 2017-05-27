@@ -1,14 +1,15 @@
 public class Tile {
+  // Orientation
+  public final static int NW = 0;
+  public final static int NE = 1;
+  public final static int SW = 2;
+  public final static int SE = 3;
+  
   private float   startX;
   private float   startY;
   private float   size;
   private int     orientation;
   private color[] palette;
-  
-  public final static int NW = 0;
-  public final static int NE = 1;
-  public final static int SW = 2;
-  public final static int SE = 3;
 
   public Tile(float startX, float startY, 
     float size, int orientation, color[]palette) {
@@ -42,5 +43,12 @@ public class Tile {
   public void show(){}
   public boolean isOrientedTo(int check){
     return (this.orientation == check);
+  }
+  public boolean mouseOver(PApplet context){
+    if(context.mouseX < getX()) return false;
+    if(context.mouseX > getX()+getSize()) return false;
+    if(context.mouseY < getY()) return false;
+    if(context.mouseX > getY()+getSize()) return false;
+    return true;
   }
 }

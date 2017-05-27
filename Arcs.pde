@@ -3,9 +3,8 @@ public class Arcs extends Tile {
   private color[] palette;
   private float[] arcPreset = new float[4];
   
-  public Arcs(color[] palette, 
-              float startX, float startY, 
-              float size, String position){
+  public Arcs(float startX, float startY, 
+              float size, String position, color[] palette){
     super(startX, startY, size);
     this.palette    = palette;
     this.spacement  = 2*getSize()/(COUNT+1);

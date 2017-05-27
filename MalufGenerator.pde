@@ -1,28 +1,35 @@
+final boolean ZUEIRA_MODE = false;
+
 Work work;
 color[] palette;
 PImage frame;
 
 public void settings() {
-  size(902, 600);
+  if (ZUEIRA_MODE) {
+    size(902, 600);
+  } else {
+    size(600, 600);
+  }
 }
 
 public void keyPressed() {
   if (keyCode == ESC) exit();
+  if (key == ' ') work.changePalette(Palette.gen(this));
 }
 
 public void setup() {
-  frame = loadImage("frame.jpg");
-  
-  palette = new color[]{Palette.WHITE, Palette.BLACK, 
-    Palette.BLUE, Palette.RED, Palette.YELLOW, 
-    Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
-    Palette.WHITE, Palette.YELLOW, Palette.RED, 
-    Palette.RED, Palette.WHITE, Palette.BLUE};
+  if (ZUEIRA_MODE) frame = loadImage("frame.jpg");
 
-  work = new Work(this, 355, 120, 185, palette);
+  palette = Palette.gen(this);
+
+  if (ZUEIRA_MODE) {
+    work = new Work(this, 355, 120, 185, palette);
+  } else {
+    work = new Work(this, 0, 0, width, palette);
+  }
 }
 
 public void draw() {
-  image(frame, 0, 0, width, height);
+  if (ZUEIRA_MODE) image(frame, 0, 0, width, height);
   work.draw();
 }

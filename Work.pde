@@ -98,6 +98,29 @@ class Work {
   }
 
   // Effects
+  public void changePalette(color[] palette){
+    this.palette = palette;
+    
+    tile[0].setPalette(getGridSubPalette(0));
+    tile[1].setPalette(getArcSubPalette(0));
+    tile[2].setPalette(getArcSubPalette(1));
+    tile[3].setPalette(getGridSubPalette(1));
+
+    tile[4].setPalette(getArcSubPalette(2));
+    tile[5].setPalette(getGridSubPalette(2));
+    tile[6].setPalette(getGridSubPalette(3));
+    tile[7].setPalette(getArcSubPalette(3));
+
+    tile[8].setPalette(getArcSubPalette(4));
+    tile[9].setPalette(getGridSubPalette(4));
+    tile[10].setPalette(getGridSubPalette(5));
+    tile[11].setPalette(getArcSubPalette(5));
+
+    tile[12].setPalette(getGridSubPalette(6));
+    tile[13].setPalette(getArcSubPalette(6));
+    tile[14].setPalette(getArcSubPalette(7));
+    tile[15].setPalette(getGridSubPalette(7));
+  }
   public void rotateEdgePalette(MouseEvent event, short edgeId) {
     if(event.getCount() == 0) return;
     

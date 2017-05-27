@@ -1,4 +1,5 @@
-final boolean ZUEIRA_MODE = false;
+final static boolean ZUEIRA_MODE = false;
+final static boolean VERBOSE = true;
 
 Work work;
 color[] palette;

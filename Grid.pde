@@ -2,16 +2,16 @@ public class Grid extends Tile {
   private final String direction;
 
   private final float piece;
-  private final float pPiece;
   private final color palette[];
   private final color background;
 
-  public Grid(float startX, float startY, float size, String direction, color background, color[] palette) {
+  public Grid(float startX, float startY, 
+    float size, String direction, 
+    color background, color[] palette) {
     super(startX, startY, size);
 
     this.direction = direction;
     this.piece = getSize()/COUNT;
-    this.pPiece = piece/COUNT;
     this.palette = palette;
     this.background = background;
   }

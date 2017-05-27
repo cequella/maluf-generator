@@ -10,7 +10,7 @@ public class Tile {
     this.size=size;
   }
 
-  // getters
+  // Getters
   public float getX() {
     return this.startX;
   }
@@ -20,4 +20,7 @@ public class Tile {
   public float getSize() {
     return this.size;
   }
+  
+  // Others
+  public void show(){}
 }

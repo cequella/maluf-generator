@@ -1,33 +1,5 @@
-/* Olhar isso!!!
-  class Arc {
-  private int count = 9;
-  private int dCount = 2*count;
-  private int dSize;
-
-  public Arc(int count, int size) {
-    this.count = count;
-    this.dCount = 2*count;
-    this.dSize = (size*2)/count;
-  }
-
-  public void draw() {
-    strokeCap(SQUARE);
-    for (int i=1; i<=count; i++) {
-      strokeWeight(dSize/dCount*i);
-      if (i!=1) {
-        noFill();
-      } else {
-        fill(255);
-      }
-      arc(0, 0, dSize*i, dSize*i, 0, HALF_PI);
-    }
-  }
-};
-  */
-
 public class Arcs extends Tile {
   private float   spacement;
-  private int[]   lineWeight = new int[COUNT];
   private color[] palette;
   private float[] arcPreset = new float[4];
   
@@ -37,11 +9,6 @@ public class Arcs extends Tile {
     super(startX, startY, size);
     this.palette    = palette;
     this.spacement  = 2*getSize()/(COUNT+1);
-    
-    // Calc dimensions: line weight and spacement
-    for(int it=0; it<COUNT; it++) {
-      lineWeight[it] = int( spacement*0.05*(it+1) );
-    }
     
     // Arc Preset
     if( position.equals("NW") ){

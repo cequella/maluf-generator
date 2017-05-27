@@ -2,7 +2,7 @@ Work work;
 color[] palette;
 
 public void settings() {
-  size(700, 700);
+  size(600, 600);
 }
 
 public void keyPressed() {

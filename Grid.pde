@@ -1,28 +1,22 @@
 public class Grid extends Tile {
-  private final String direction;
-
   private final float piece;
-  private final color palette[];
   private final color background;
 
   public Grid(float startX, float startY, 
-    float size, String direction, 
+    float size, int orientation, 
     color background, color[] palette) {
-    super(startX, startY, size);
+    super(startX, startY, size, orientation, palette);
 
-    this.direction = direction;
     this.piece = getSize()/COUNT;
-    this.palette = palette;
     this.background = background;
   }
 
   private void drawCollumns() {
-    color[] aux = {palette[4], palette[5], palette[6], palette[7]};
+    final color[] palette = getPalette();
+    color[] aux;
 
-    if (direction.equals("NW")) {
+    if (isOrientedTo(Tile.NW)) {
       aux = new color[]{palette[6], palette[7], palette[4], palette[5]};
-    } else if (direction.equals("NE")) {
-      aux = new color[]{palette[4], palette[5], palette[6], palette[7]};
     } else {
       aux = new color[]{palette[4], palette[5], palette[6], palette[7]};
     }
@@ -32,16 +26,17 @@ public class Grid extends Tile {
 
       for (int j=i+1; j<COUNT; j++) {
         final float dx = float(j+1)/(COUNT+1);
-        final float y = (direction.equals("NE") || direction.equals("SW"))? getY()+getSize()-(j+1)*this.piece : getY()+j*this.piece;
+        final float y = (isOrientedTo(Tile.NE) || isOrientedTo(Tile.SW))? getY()+getSize()-(j+1)*this.piece : getY()+j*this.piece;
 
         drawSquare(getX()+i*this.piece, y, dy, dx, aux);
       }
     }
   }
   private void drawLines() {
+    final color[] palette = getPalette();
     color[] aux;
 
-    if (direction.equals("NW")) {
+    if (isOrientedTo(Tile.NW)) {
       aux = new color[]{palette[3], palette[0], palette[1], palette[2]};
     } else {
       aux = new color[]{palette[0], palette[1], palette[2], palette[3]};
@@ -52,7 +47,7 @@ public class Grid extends Tile {
 
       for (int j=i+1; j<COUNT; j++) {
         final float dx = float(j+1)/(COUNT+1);
-        final float y = (direction.equals("NE") || direction.equals("SW"))? getY()+getSize()-(i+1)*this.piece : getY()+i*this.piece;
+        final float y = (isOrientedTo(Tile.NE) || isOrientedTo(Tile.SW))? getY()+getSize()-(i+1)*this.piece : getY()+i*this.piece;
 
         drawSquare(getX()+j*this.piece, y, dx, dy, aux);
       }
@@ -61,7 +56,7 @@ public class Grid extends Tile {
   private void drawSquare(float x, float y, float dX, float dY, color[] c) {
     float w1 = 1.0-dX;
     float w2 = dX;
-    float h1 = (direction.equals("NE") || direction.equals("SW"))? dY : 1.0-dY;
+    float h1 = (isOrientedTo(Tile.NE) || isOrientedTo(Tile.SW))? dY : 1.0-dY;
     float h2 = 1.0-h1;
 
     fill(c[0]);

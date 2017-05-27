@@ -15,7 +15,7 @@ public void setup() {
     Palette.YELLOW, Palette.BLUE, Palette.WHITE, 
     Palette.WHITE, Palette.YELLOW, Palette.RED, 
     Palette.RED, Palette.WHITE, Palette.BLUE};
-    
+
   work = new Work(this, palette);
 }
 

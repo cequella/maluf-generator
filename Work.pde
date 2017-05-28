@@ -71,6 +71,7 @@ class Work {
     //Draw lines
     strokeWeight(2);
     stroke(palette[0]);
+    strokeCap(SQUARE);
     line(this.x, this.y+this.size, this.x+4*this.size, this.y+this.size);
     line(this.x, this.y+3*this.size, this.x+4*this.size, this.y+3*this.size);
     line(this.x+this.size, this.y, this.x+this.size, this.y+4*this.size);

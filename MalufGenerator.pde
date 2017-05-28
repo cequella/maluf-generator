@@ -1,7 +1,7 @@
 final static boolean ZUEIRA_MODE = false;
-final static boolean VERBOSE = true;
+final static boolean VERBOSE = false;
 
-Work work;
+Work work;  
 color[] palette;
 PImage frame;
 

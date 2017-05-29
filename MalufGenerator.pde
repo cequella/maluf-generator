@@ -15,13 +15,15 @@ public void settings() {
 
 public void keyPressed() {
   if (keyCode == ESC) exit();
-  if (key == ' ') work.changePalette(Palette.gen(this));
+  if (key == 'q' || key == 'Q') work.changePalette(Palette.gen(this, Palette.DESTIJL));
+  if (key == 'w' || key == 'W') work.changePalette(Palette.gen(this, Palette.BICROMATIC));
+  if (key == 'e' || key == 'E') work.changePalette(Palette.gen(this, Palette.COLD));
 }
 
 public void setup() {
   if (ZUEIRA_MODE) frame = loadImage("frame.jpg");
 
-  palette = Palette.gen(this);
+  palette = Palette.gen(this, Palette.DESTIJL);
 
   if (ZUEIRA_MODE) {
     work = new Work(this, 355, 120, 185, palette);

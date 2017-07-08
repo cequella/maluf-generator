@@ -1,3 +1,5 @@
+public final static int MIN_COUNT = 3;
+public final static int MAX_COUNT = 11;
 
 public final static class Palette {
   // Palettes
@@ -20,7 +22,7 @@ public final static class Palette {
   
   public final static color[] DESTIJL    = {YELLOW, RED, BLUE, D_GRAY};
   public final static color[] COLD       = {ORANGE, COFFEE, D_RED, WINE, LAVANDER, NAVY, PURPLE, GOLD, GREEN};
-  public final static color[] BICROMATIC = {WHITE, BLACK, D_GRAY, L_YELLOW, RED};
+  public final static color[] BICHROMATIC = {WHITE, BLACK, D_GRAY, L_YELLOW, RED};
 
   private static color[] gen(PApplet context, color[] style) {
     color[] out = new color[14];
@@ -34,7 +36,7 @@ public final static class Palette {
     out[0] = WHITE; //Background
     out[1] = base[accent];
 
-    // Remove accent from base
+    // Remove accent from base - quick context
     {
       final int aux = int(context.random(0, base.length));
       base[accent] = base[aux];

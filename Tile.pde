@@ -10,14 +10,16 @@ public class Tile {
   private float   size;
   private int     orientation;
   private color[] palette;
+  private int     count;
 
   public Tile(float startX, float startY, 
-    float size, int orientation, color[]palette) {
+            float size, int count, int orientation, color[]palette) {
     this.startX=startX;
     this.startY=startY;
     this.size=size;
     this.orientation = orientation;
     this.palette = palette;
+    this.count = count;
   }
 
   // Getters
@@ -33,10 +35,16 @@ public class Tile {
   public color[] getPalette(){
     return this.palette;
   }
+  public int getCount(){
+    return this.count;
+  }
   
   // Setters
   public void setPalette(color[] palette){
     this.palette = palette;
+  }
+  public void setCount(int count){
+    this.count = count;
   }
   
   // Others

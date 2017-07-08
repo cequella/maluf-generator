@@ -1,3 +1,4 @@
+//final int COUNT = 9; //Arc grid count
 
 public final static class SRC {
   public static final int[][] gridPaletteIndex = {

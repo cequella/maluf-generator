@@ -1,12 +1,12 @@
 public class Arcs extends Tile {
   private float   spacement;
-  //private color[] palette;
   private float[] arcPreset = new float[4];
   
   public Arcs(float startX, float startY, 
-              float size, int orientation, color[] palette){
-    super(startX, startY, size, orientation, palette);
-    this.spacement  = 2*getSize()/(COUNT+1);
+              float size, int count,
+              int orientation, color[] palette){
+    super(startX, startY, size, count, orientation, palette);
+    this.spacement  = 2*getSize()/(count+1);
     
     // Arc Preset
     if( isOrientedTo(Tile.NW) ){
@@ -42,8 +42,8 @@ public class Arcs extends Tile {
     rect(getX(), getY(), getSize(), getSize());
     
     // Draw Arcs
-    for(int it=0; it<=COUNT+1; it++){
-      if(it <= COUNT){
+    for(int it=0; it<=getCount()+1; it++){
+      if(it <= getCount()){
         fill(palette[1]);
         arc(getX()+arcPreset[0],
             getY()+arcPreset[1], 
@@ -61,7 +61,7 @@ public class Arcs extends Tile {
             arcPreset[2],
             arcPreset[3]);
       } else {
-        final float size = 2*getSize()/COUNT;
+        final float size = 2*getSize()/float(getCount());
         fill(Palette.WHITE);
         arc(getX()+arcPreset[0],
             getY()+arcPreset[1], 

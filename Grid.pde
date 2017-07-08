@@ -3,11 +3,11 @@ public class Grid extends Tile {
   private final color background;
 
   public Grid(float startX, float startY, 
-    float size, int orientation, 
-    color background, color[] palette) {
-    super(startX, startY, size, orientation, palette);
+              float size, int count,
+              int orientation, color background, color[] palette) {
+    super(startX, startY, size, count, orientation, palette);
 
-    this.piece = getSize()/COUNT;
+    this.piece = getSize()/count;
     this.background = background;
   }
 
@@ -21,11 +21,11 @@ public class Grid extends Tile {
       aux = new color[]{palette[4], palette[5], palette[6], palette[7]};
     }
 
-    for (int i=0; i<COUNT; i++) {
-      final float dy = float(i+1)/(COUNT+1);
+    for (int i=0; i<getCount(); i++) {
+      final float dy = float(i+1)/float(getCount()+1);
 
-      for (int j=i+1; j<COUNT; j++) {
-        final float dx = float(j+1)/(COUNT+1);
+      for (int j=i+1; j<getCount(); j++) {
+        final float dx = float(j+1)/float(getCount()+1);
         final float y = (isOrientedTo(Tile.NE) || isOrientedTo(Tile.SW))? getY()+getSize()-(j+1)*this.piece : getY()+j*this.piece;
 
         drawSquare(getX()+i*this.piece, y, dy, dx, aux);
@@ -42,11 +42,11 @@ public class Grid extends Tile {
       aux = new color[]{palette[0], palette[1], palette[2], palette[3]};
     }
 
-    for (int i=0; i<COUNT; i++) {
-      final float dy = float(i+1)/(COUNT+1);
+    for (int i=0; i<getCount(); i++) {
+      final float dy = float(i+1)/float(getCount()+1);
 
-      for (int j=i+1; j<COUNT; j++) {
-        final float dx = float(j+1)/(COUNT+1);
+      for (int j=i+1; j<getCount(); j++) {
+        final float dx = float(j+1)/(getCount()+1);
         final float y = (isOrientedTo(Tile.NE) || isOrientedTo(Tile.SW))? getY()+getSize()-(i+1)*this.piece : getY()+i*this.piece;
 
         drawSquare(getX()+j*this.piece, y, dx, dy, aux);

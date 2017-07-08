@@ -1,5 +1,3 @@
-final int COUNT = 9;
-
 class Work {
   private final float size;
 
@@ -7,13 +5,15 @@ class Work {
   private int     x, y;
   private Tile    tile[] = new Tile[16];
   private color[] palette;
+  private int     count;
 
-  public Work(PApplet context, int x, int y, int size, color[] palette) {
+  public Work(PApplet context, int x, int y, int size, int count, color[] palette) {
     this.context = context;
     this.x = x;
     this.y = y;
     this.size = size/4;
     this.palette = palette;
+    this.count = count;
 
     genTiles(this.size);
   }
@@ -39,28 +39,28 @@ class Work {
 
   private void genTiles(float size) {
     //First Line
-    tile[0]  = new Grid(this.x, this.y, size, Tile.NW, palette[0], getGridSubPalette(0));
-    tile[1]  = new Arcs(this.x+size, this.y, size, Tile.SW, getArcSubPalette(0));
-    tile[2]  = new Arcs(this.x+2*size, this.y, size, Tile.SE, getArcSubPalette(1));
-    tile[3]  = new Grid(this.x+3*size, this.y, size, Tile.NE, palette[0], getGridSubPalette(1));
+    tile[0]  = new Grid(this.x, this.y, size, this.count, Tile.NW, palette[0], getGridSubPalette(0));
+    tile[1]  = new Arcs(this.x+size, this.y, size, this.count, Tile.SW, getArcSubPalette(0));
+    tile[2]  = new Arcs(this.x+2*size, this.y, size, this.count, Tile.SE, getArcSubPalette(1));
+    tile[3]  = new Grid(this.x+3*size, this.y, size, this.count, Tile.NE, palette[0], getGridSubPalette(1));
 
     //Second Line
-    tile[4]  = new Arcs(this.x, this.y+size, size, Tile.NE, getArcSubPalette(2));
-    tile[5]  = new Grid(this.x+size, this.y+size, size, Tile.SE, palette[0], getGridSubPalette(2));
-    tile[6]  = new Grid(this.x+2*size, this.y+size, size, Tile.SW, palette[0], getGridSubPalette(3));
-    tile[7]  = new Arcs(this.x+3*size, this.y+size, size, Tile.NW, getArcSubPalette(3));
+    tile[4]  = new Arcs(this.x, this.y+size, size, this.count, Tile.NE, getArcSubPalette(2));
+    tile[5]  = new Grid(this.x+size, this.y+size, size, this.count, Tile.SE, palette[0], getGridSubPalette(2));
+    tile[6]  = new Grid(this.x+2*size, this.y+size, size, this.count, Tile.SW, palette[0], getGridSubPalette(3));
+    tile[7]  = new Arcs(this.x+3*size, this.y+size, size, this.count, Tile.NW, getArcSubPalette(3));
 
     //Third Line
-    tile[8]  = new Arcs(this.x, this.y+2*size, size, Tile.SE, getArcSubPalette(4));
-    tile[9]  = new Grid(this.x+size, this.y+2*size, size, Tile.NE, palette[0], getGridSubPalette(4));
-    tile[10] = new Grid(this.x+2*size, this.y+2*size, size, Tile.NW, palette[0], getGridSubPalette(5));
-    tile[11] = new Arcs(this.x+3*size, this.y+2*size, size, Tile.SW, getArcSubPalette(5));
+    tile[8]  = new Arcs(this.x, this.y+2*size, size, this.count, Tile.SE, getArcSubPalette(4));
+    tile[9]  = new Grid(this.x+size, this.y+2*size, size, this.count, Tile.NE, palette[0], getGridSubPalette(4));
+    tile[10] = new Grid(this.x+2*size, this.y+2*size, size, this.count, Tile.NW, palette[0], getGridSubPalette(5));
+    tile[11] = new Arcs(this.x+3*size, this.y+2*size, size, this.count, Tile.SW, getArcSubPalette(5));
 
     //Last Line
-    tile[12] = new Grid(this.x, this.y+3*size, size, Tile.SW, palette[0], getGridSubPalette(6));
-    tile[13] = new Arcs(this.x+size, this.y+3*size, size, Tile.NW, getArcSubPalette(6));
-    tile[14] = new Arcs(this.x+2*size, this.y+3*size, size, Tile.NE, getArcSubPalette(7));
-    tile[15] = new Grid(this.x+3*size, this.y+3*size, size, Tile.SE, palette[0], getGridSubPalette(7));
+    tile[12] = new Grid(this.x, this.y+3*size, size, this.count, Tile.SW, palette[0], getGridSubPalette(6));
+    tile[13] = new Arcs(this.x+size, this.y+3*size, size, this.count, Tile.NW, getArcSubPalette(6));
+    tile[14] = new Arcs(this.x+2*size, this.y+3*size, size, this.count, Tile.NE, getArcSubPalette(7));
+    tile[15] = new Grid(this.x+3*size, this.y+3*size, size, this.count, Tile.SE, palette[0], getGridSubPalette(7));
   }
 
   public void draw() {
@@ -122,10 +122,48 @@ class Work {
     tile[14].setPalette(getArcSubPalette(7));
     tile[15].setPalette(getGridSubPalette(7));
   }
-  public void rotateEdgePalette(MouseEvent event, short edgeId) {
-    if(event.getCount() == 0) return;
+  public void rotatePalette(int direction){
+    color[] temp = new color[14];
     
-    final int factor = event.getCount()/abs(event.getCount());
+    temp[0] = this.palette[0];
+    temp[1] = this.palette[1];
     
+    if(direction>0){
+      temp[2]  = this.palette[11];
+      temp[3]  = this.palette[13];
+      temp[4]  = this.palette[12];
+      temp[5]  = this.palette[2];
+      temp[6]  = this.palette[3];
+      temp[7]  = this.palette[4];
+      temp[8]  = this.palette[5];
+      temp[9]  = this.palette[7];
+      temp[10] = this.palette[6];
+      temp[11] = this.palette[8];
+      temp[12] = this.palette[9];
+      temp[13] = this.palette[10];
+    } else {
+      temp[11] = this.palette[2];
+      temp[13] = this.palette[3];
+      temp[12] = this.palette[3];
+      temp[2]  = this.palette[5];
+      temp[3]  = this.palette[6];
+      temp[4]  = this.palette[7];
+      temp[5]  = this.palette[8];
+      temp[7]  = this.palette[9];
+      temp[6]  = this.palette[10];
+      temp[8]  = this.palette[11];
+      temp[9]  = this.palette[12];
+      temp[10] = this.palette[13];
+    }
+    
+    this.changePalette(temp);
+  }
+  void addCount(){
+    this.count++;
+    this.genTiles(this.size);
+  }
+  void subCount(){
+    this.count--;
+    this.genTiles(this.size);
   }
 }

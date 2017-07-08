@@ -1,4 +1,4 @@
-final static boolean ZUEIRA_MODE = false;
+final static boolean ZUEIRA_MODE = true;
 final static boolean VERBOSE = false;
 final static int     GUI_SIZE = 300;
 

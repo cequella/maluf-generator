@@ -158,6 +158,10 @@ class Work {
     
     this.changePalette(temp);
   }
+  void setCount(int count){
+    this.count = count;
+    this.genTiles(this.size);
+  }
   void addCount(){
     this.count++;
     this.genTiles(this.size);

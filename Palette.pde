@@ -1,6 +1,3 @@
-public final static int MIN_COUNT = 3;
-public final static int MAX_COUNT = 11;
-
 public final static class Palette {
   // Palettes
   private final static color WHITE    = #F4F4F4;
